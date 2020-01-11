@@ -16,7 +16,6 @@ SDL_Rect pos;
 
 int screenWidth = 500;
 int screenHeight = 500;
-int gridSize = 1;
 bool run = false;
 double mag = 0;
 double zoom;
@@ -301,7 +300,6 @@ void Draw(){
             pos.h = 1;
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             SDL_RenderFillRect(renderer, &pos);
-            
         }
         pos.x = static_cast<int>((objects[i][1] + posx)*zoom + screenWidth/2 - (ceil(objects[i][0] / mpp * zoom) + 1)/2);
         pos.y = static_cast<int>((objects[i][2] + posy)*zoom + screenHeight/2 - (ceil(objects[i][0] / mpp * zoom) + 1)/2);
