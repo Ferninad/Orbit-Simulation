@@ -335,6 +335,27 @@ void Draw(){
 
 void Simulate(){
     for(int i = 0; i < objects.size(); i++){
+        for(int j = 0; j < objects.size(); j++){
+            if(i != j){
+                if(sqrt(pow(objects[j][1] - objects[i][1], 2) + pow(objects[j][2] - objects[i][2], 2)) < (objects[i][0] / mpp)/2 + (objects[j][0] / mpp)/2){
+                    double vx = (objects[i][0] * objects[i][3] + objects[j][0] * objects[j][3]) / (objects[i][0] + objects[j][0]);
+                    double vy = (objects[i][0] * objects[i][4] + objects[j][0] * objects[j][4]) / (objects[i][0] + objects[j][0]);
+                    cout << vy << endl;
+                    objects[i][0] += objects[j][0];
+                    objects[i][3] = vx;
+                    objects[i][4] = vy;
+                    objects.erase(objects.begin()+j);
+                    if(j < i){
+                        i--;
+                        j--;
+                    }
+                    else
+                        j--;
+                }
+            }
+        }
+    }
+    for(int i = 0; i < objects.size(); i++){
         int trailLength = 10000 / timeStep;
         if(i == followObject){
             if(trail.size() == trailLength){
